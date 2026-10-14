@@ -1,57 +1,127 @@
 # Projet 2 - Communes et CouchDB
 
 Dépôt : https://github.com/Bern1408/projet2-ExploTechno
+## Membres de l'équipe
+- Alexandre Doe-Langevein
+- Bernardo Gonçalves da Cruz
+## Nettoyage des données
+Les 3102 enregistrements CSV donnent des communes distinctes, donc aucun doublon a été retiré.
+## Structure des documents
+| Champ | Type JSON | Rôle |
+| --- | --- | --- |
+| `_id` | string | `commune:` suivi du code INSEE, unique et stable pour ce jeu de données |
+| `type` | string | Toujours `commune`; distingue les données des documents techniques |
+| `code_insee` | string | Cinq caractères, conserve les zéros initiaux |
+| `nom`, `departement` | string | Textes normalisés en Unicode NFC |
+| `codes_postaux`, `cantons` | array de strings | Plusieurs valeurs possibles; tableau vide si inconnu |
+| `arrondissement`, `intercommunalite` | string ou null | Informations administratives |
+| `superficie_km2`, `densite_hab_km2` | number ou null | Décimaux, respectivement km² et habitants/km² |
+| `population` | number entier ou null | Nombre d'habitants |
+| `annee_population` | number entier ou null | Année de référence extraite de la population |
+| `source` | object | URLs `url_liste` et `url_commune`, de type string |
 
-## Remise
+## Méthode d'importation
+La base `projet2_communes` a été créée dans CouchDB 3.5.0 avec Docker Compose. Le script `scripts/couchdb_pipeline.py` importe `donnees.json` via `_bulk_docs` par lots de 500 et contrôle chaque résultat, car une réponse HTTP réussie ne garantit pas la réussite de tous les documents. Il récupère les révisions avant une nouvelle importation.
 
-Le [rapport](rapport.md) regroupe la modélisation, deux exemples, le nettoyage, l'importation, les requêtes et leur interprétation. Les membres doivent compléter leurs pourcentages réels de participation avant la remise.
+Le contrôle relit tous les documents et compare les identifiants, les contenus et les types Python issus du JSON. Les accents et les zéros initiaux sont ainsi contrôlés sur l'ensemble des données. La base contient 3 102 communes et trois documents techniques `_design` (deux index Mango et une vue). Le compteur global CouchDB inclut ces documents techniques et vaut donc 3 105. La procédure PowerShell complète a été exécutée puis relancée avec succès sans doublons. Les preuves sont dans `results/verification.json`.
+## Requêtes
+### 1. Filtre multicritère avec projection (Mango)
 
-- `data/raw/communes.csv` : extraction HTML brute UTF-8, inchangée.
-- `donnees.json` : 3 102 communes distinctes nettoyées.
-- `scripts/` : extraction, transformation et importation avec vérifications.
-- `couchdb/` : configuration, index, deux requêtes Mango et vue MapReduce.
-- `results/` : résultats réellement obtenus et preuves des vérifications.
-- `compose.yaml` : instance CouchDB reproductible avec volume persistant.
-- `requirements.txt` : dépendances de l'extraction HTML.
+Question : quelles communes du Nord ont au moins 10 000 habitants et une densité d'au moins 1 000 habitants/km² ?
 
-## Recréer la base sous Ubuntu / WSL
-
-Prérequis : Python 3.10 ou plus et Docker avec Compose. Les scripts de nettoyage et d'importation utilisent uniquement la bibliothèque standard Python. Il n'est pas nécessaire de refaire l'extraction.
-
-Définir localement vos identifiants dans le terminal (aucun mot de passe à déposer dans Git ou dans le ZIP) :
-
-```bash
-export COUCHDB_USER=projet2_admin
-read -rsp 'Mot de passe CouchDB : ' COUCHDB_PASSWORD; echo
-export COUCHDB_PASSWORD
-docker compose up -d
+```json
+{
+  "selector": {
+    "type": "commune",
+    "departement": "Nord",
+    "population": {
+      "$gte": 10000
+    },
+    "densite_hab_km2": {
+      "$gte": 1000
+    }
+  },
+  "fields": [
+    "nom",
+    "code_insee",
+    "departement",
+    "population",
+    "densite_hab_km2"
+  ],
+  "use_index": [
+    "filtre",
+    "par_departement_population"
+  ],
+  "allow_fallback": false,
+  "limit": 5000
+}
 ```
+### 2. Tri avec limite (Mango)
 
-Attendre que CouchDB réponde sur http://127.0.0.1:5984/, puis :
+Question : quelles sont les dix communes les plus peuplées parmi les quatre départements extraits ?
 
-```bash
-# Facultatif : régénérer le JSON à partir du CSV brut.
-python3 scripts/transform_communes.py
-# Créer la base, importer le JSON fourni et reproduire les résultats.
-python3 scripts/couchdb_pipeline.py
+```json
+{
+  "selector": {
+    "type": "commune",
+    "population": {
+      "$gte": 0
+    },
+    "code_insee": {
+      "$gte": ""
+    }
+  },
+  "fields": [
+    "nom",
+    "code_insee",
+    "departement",
+    "population",
+    "annee_population"
+  ],
+  "sort": [
+    {
+      "type": "desc"
+    },
+    {
+      "population": "desc"
+    },
+    {
+      "code_insee": "desc"
+    }
+  ],
+  "limit": 10,
+  "use_index": [
+    "classement",
+    "par_population"
+  ],
+  "allow_fallback": false
+}
 ```
+### 3. Regroupement avec calcul (vue MapReduce)
 
-Résultat attendu : `Base projet2_communes: 3102 communes vérifiées; trois requêtes validées`. Une deuxième exécution ne crée pas de doublons. Les 3 documents `_design` sont techniques : CouchDB affiche donc 3 105 documents au total.
+Question : combien d'habitants et de communes compte chaque département extrait ?
 
-Pour un serveur existant, définir `COUCHDB_URL` et éventuellement `COUCHDB_DATABASE` en plus des identifiants. Utiliser une base dédiée. Ne pas lancer Python avec `-O`, car les vérifications utilisent `assert`. Les paramètres par défaut sont `http://127.0.0.1:5984` et `projet2_communes`.
+```json
+{
+  "_id": "_design/statistiques",
+  "language": "javascript",
+  "views": {
+    "population_par_departement": {
+      "map": "function(doc) { if (doc.type === 'commune' && typeof doc.departement === 'string' && typeof doc.population === 'number') { emit(doc.departement, doc.population); } }",
+      "reduce": "_stats"
+    }
+  }
+}
+```
+Appel : `GET /projet2_communes/_design/statistiques/_view/population_par_departement?group=true`.
 
-Pour refaire l'extraction seulement : installer `requirements.txt` avec pip puis lancer `scripts/scrape_communes.py --output` avec un nouveau chemin afin de préserver le CSV fourni.
+## Contribution des membres
+- **Bernardo :** Étapes 1-3 et 8
+- **Alexandre :** Étapes 4-7
 
-## Consulter les requêtes dans Fauxton
+## IA et attribution
 
-Ouvrir http://127.0.0.1:5984/_utils/ et la base `projet2_communes`.
+Codex a aidé à sélectionner les sources, écrire les scripts, exécuter l’extraction et vérifier les fichiers depuis le terminal. Codex a également préparé la modélisation, le nettoyage, l'importation et les requêtes. Les 3 102 documents et les résultats des trois requêtes ont été comparés automatiquement aux données JSON, dans CouchDB 3.5.0.
 
-- Copier `couchdb/requetes/01_filtre.json` dans Mango Query : 40 communes.
-- Copier `couchdb/requetes/02_tri.json` : 10 communes, Lille en tête.
-- Consulter `GET /projet2_communes/_design/statistiques/_view/population_par_departement?group=true` : 4 départements.
-
-Choisir 50 documents par page pour afficher tout le filtre. Avec 20 par page, Fauxton demande 21 résultats pour détecter une page suivante; ce compteur ne représente pas le total.
-
-Les fichiers de `couchdb/indexes.json` sont envoyés à `POST /projet2_communes/_index`. La vue `couchdb/requetes/vue_departements.json` est envoyée à `PUT /projet2_communes/_design/statistiques`. Le script effectue ces opérations automatiquement.
-
-`docker compose stop` arrête le service en conservant les données. Pour le ZIP, inclure les fichiers suivis par Git, sans `.git`, identifiants ni caches.
+## Source
+[Wikipédia](https://fr.wikipedia.org/wiki/Wikipédia:Citation_et_réutilisation_du_contenu_de_Wikipédia)
