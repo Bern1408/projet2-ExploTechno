@@ -1,0 +1,285 @@
+{
+  "docs": [
+    {
+      "nom": "Neuville-en-Ferrain",
+      "code_insee": "59426",
+      "departement": "Nord",
+      "population": 10002,
+      "densite_hab_km2": 1618.0
+    },
+    {
+      "nom": "Douchy-les-Mines",
+      "code_insee": "59179",
+      "departement": "Nord",
+      "population": 10109,
+      "densite_hab_km2": 1099.0
+    },
+    {
+      "nom": "Annœullin",
+      "code_insee": "59011",
+      "departement": "Nord",
+      "population": 10847,
+      "densite_hab_km2": 1204.0
+    },
+    {
+      "nom": "Bruay-sur-l'Escaut",
+      "code_insee": "59112",
+      "departement": "Nord",
+      "population": 11644,
+      "densite_hab_km2": 1738.0
+    },
+    {
+      "nom": "Marly",
+      "code_insee": "59383",
+      "departement": "Nord",
+      "population": 11995,
+      "densite_hab_km2": 1492.0
+    },
+    {
+      "nom": "Marquette-lez-Lille",
+      "code_insee": "59386",
+      "departement": "Nord",
+      "population": 12622,
+      "densite_hab_km2": 2597.0
+    },
+    {
+      "nom": "Anzin",
+      "code_insee": "59014",
+      "departement": "Nord",
+      "population": 13183,
+      "densite_hab_km2": 3622.0
+    },
+    {
+      "nom": "Saint-André-lez-Lille",
+      "code_insee": "59527",
+      "departement": "Nord",
+      "population": 13233,
+      "densite_hab_km2": 4188.0
+    },
+    {
+      "nom": "Mouvaux",
+      "code_insee": "59421",
+      "departement": "Nord",
+      "population": 13369,
+      "densite_hab_km2": 3206.0
+    },
+    {
+      "nom": "Caudry",
+      "code_insee": "59139",
+      "departement": "Nord",
+      "population": 13833,
+      "densite_hab_km2": 1069.0
+    },
+    {
+      "nom": "Lys-lez-Lannoy",
+      "code_insee": "59367",
+      "departement": "Nord",
+      "population": 14050,
+      "densite_hab_km2": 4310.0
+    },
+    {
+      "nom": "Roncq",
+      "code_insee": "59508",
+      "departement": "Nord",
+      "population": 14075,
+      "densite_hab_km2": 1329.0
+    },
+    {
+      "nom": "Hautmont",
+      "code_insee": "59291",
+      "departement": "Nord",
+      "population": 14152,
+      "densite_hab_km2": 1153.0
+    },
+    {
+      "nom": "Haubourdin",
+      "code_insee": "59286",
+      "departement": "Nord",
+      "population": 15074,
+      "densite_hab_km2": 2839.0
+    },
+    {
+      "nom": "Wattignies",
+      "code_insee": "59648",
+      "departement": "Nord",
+      "population": 15525,
+      "densite_hab_km2": 2460.0
+    },
+    {
+      "nom": "Sin-le-Noble",
+      "code_insee": "59569",
+      "departement": "Nord",
+      "population": 16076,
+      "densite_hab_km2": 1394.0
+    },
+    {
+      "nom": "Hem",
+      "code_insee": "59299",
+      "departement": "Nord",
+      "population": 18582,
+      "densite_hab_km2": 1926.0
+    },
+    {
+      "nom": "Faches-Thumesnil",
+      "code_insee": "59220",
+      "departement": "Nord",
+      "population": 18619,
+      "densite_hab_km2": 4030.0
+    },
+    {
+      "nom": "Ronchin",
+      "code_insee": "59507",
+      "departement": "Nord",
+      "population": 19787,
+      "densite_hab_km2": 3651.0
+    },
+    {
+      "nom": "Croix",
+      "code_insee": "59163",
+      "departement": "Nord",
+      "population": 20566,
+      "densite_hab_km2": 4632.0
+    },
+    {
+      "nom": "Denain",
+      "code_insee": "59172",
+      "departement": "Nord",
+      "population": 20665,
+      "densite_hab_km2": 1794.0
+    },
+    {
+      "nom": "Halluin",
+      "code_insee": "59279",
+      "departement": "Nord",
+      "population": 20715,
+      "densite_hab_km2": 1649.0
+    },
+    {
+      "nom": "Wasquehal",
+      "code_insee": "59646",
+      "departement": "Nord",
+      "population": 20726,
+      "densite_hab_km2": 3021.0
+    },
+    {
+      "nom": "Coudekerque-Branche",
+      "code_insee": "59155",
+      "departement": "Nord",
+      "population": 20787,
+      "densite_hab_km2": 2274.0
+    },
+    {
+      "nom": "Mons-en-Barœul",
+      "code_insee": "59410",
+      "departement": "Nord",
+      "population": 21105,
+      "densite_hab_km2": 7328.0
+    },
+    {
+      "nom": "La Madeleine",
+      "code_insee": "59368",
+      "departement": "Nord",
+      "population": 21790,
+      "densite_hab_km2": 7673.0
+    },
+    {
+      "nom": "Loos",
+      "code_insee": "59360",
+      "departement": "Nord",
+      "population": 22567,
+      "densite_hab_km2": 3247.0
+    },
+    {
+      "nom": "Armentières",
+      "code_insee": "59017",
+      "departement": "Nord",
+      "population": 26998,
+      "densite_hab_km2": 4299.0
+    },
+    {
+      "nom": "Lambersart",
+      "code_insee": "59328",
+      "departement": "Nord",
+      "population": 27090,
+      "densite_hab_km2": 4398.0
+    },
+    {
+      "nom": "Maubeuge",
+      "code_insee": "59392",
+      "departement": "Nord",
+      "population": 28767,
+      "densite_hab_km2": 1526.0
+    },
+    {
+      "nom": "Cambrai",
+      "code_insee": "59122",
+      "departement": "Nord",
+      "population": 31134,
+      "densite_hab_km2": 1713.0
+    },
+    {
+      "nom": "Marcq-en-Barœul",
+      "code_insee": "59378",
+      "departement": "Nord",
+      "population": 40184,
+      "densite_hab_km2": 2862.0
+    },
+    {
+      "nom": "Douai",
+      "code_insee": "59178",
+      "departement": "Nord",
+      "population": 40250,
+      "densite_hab_km2": 2384.0
+    },
+    {
+      "nom": "Wattrelos",
+      "code_insee": "59650",
+      "departement": "Nord",
+      "population": 40847,
+      "densite_hab_km2": 3039.0
+    },
+    {
+      "nom": "Valenciennes",
+      "code_insee": "59606",
+      "departement": "Nord",
+      "population": 43468,
+      "densite_hab_km2": 3145.0
+    },
+    {
+      "nom": "Villeneuve-d'Ascq",
+      "code_insee": "59009",
+      "departement": "Nord",
+      "population": 62868,
+      "densite_hab_km2": 2289.0
+    },
+    {
+      "nom": "Dunkerque",
+      "code_insee": "59183",
+      "departement": "Nord",
+      "population": 86263,
+      "densite_hab_km2": 1965.0
+    },
+    {
+      "nom": "Roubaix",
+      "code_insee": "59512",
+      "departement": "Nord",
+      "population": 98286,
+      "densite_hab_km2": 7429.0
+    },
+    {
+      "nom": "Tourcoing",
+      "code_insee": "59599",
+      "departement": "Nord",
+      "population": 98772,
+      "densite_hab_km2": 6502.0
+    },
+    {
+      "nom": "Lille",
+      "code_insee": "59350",
+      "departement": "Nord",
+      "population": 238246,
+      "densite_hab_km2": 6840.0
+    }
+  ],
+  "bookmark": "g1AAAABYeJzLYWBgYMpgSmHgKy5JLCrJTq2MT8lPzkzJBYrzJufn5pbmpVqZWhqbGoAUccAU5QClmUFq2KFqQGwWv_yilCQG5kXLsrIALNAYew"
+}

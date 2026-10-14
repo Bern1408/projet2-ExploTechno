@@ -1,4 +1,5 @@
-# Projet 2 — Collecter et exploiter des données Web
+# Projet 2 - Communes et CouchDB
+
 Dépôt : https://github.com/Bern1408/projet2-ExploTechno
 ## Membres de l'équipe
 - Alexandre Doe-Langevein

@@ -1,0 +1,44 @@
+{
+  "rows": [
+    {
+      "key": "Aisne",
+      "value": {
+        "sum": 523342,
+        "count": 797,
+        "min": 16,
+        "max": 52813,
+        "sumsqr": 5315986220
+      }
+    },
+    {
+      "key": "Nord",
+      "value": {
+        "sum": 2615635,
+        "count": 647,
+        "min": 43,
+        "max": 238246,
+        "sumsqr": 112296740557
+      }
+    },
+    {
+      "key": "Pas-de-Calais",
+      "value": {
+        "sum": 1457905,
+        "count": 887,
+        "min": 13,
+        "max": 67571,
+        "sumsqr": 17937272881
+      }
+    },
+    {
+      "key": "Somme",
+      "value": {
+        "sum": 565413,
+        "count": 771,
+        "min": 7,
+        "max": 136449,
+        "sumsqr": 19881937779
+      }
+    }
+  ]
+}

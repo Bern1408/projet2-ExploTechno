@@ -1,0 +1,4 @@
+[
+  {"index":{"fields":["type","departement","population"]},"ddoc":"filtre","name":"par_departement_population","type":"json"},
+  {"index":{"fields":["type","population","code_insee"]},"ddoc":"classement","name":"par_population","type":"json"}
+]
