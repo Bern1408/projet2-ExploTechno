@@ -128,7 +128,7 @@ Appel : `GET /projet2_communes/_design/statistiques/_view/population_par_departe
 
 ## IA et attribution
 
-Codex a aidé à sélectionner les sources, écrire les scripts, exécuter l’extraction et vérifier les fichiers depuis le terminal. Codex a également préparé la modélisation, le nettoyage, l'importation et les requêtes. Les 3 102 documents et les résultats des trois requêtes ont été comparés automatiquement aux données JSON, dans CouchDB 3.5.0.
+Codex a aidé à écrire les documents, sélectionner les sources et vérifier les fichiers depuis le terminal. Codex a également exécuté l’extraction, préparé la modélisation, le nettoyage et l'importation. Les 3 102 documents et les résultats des trois requêtes ont été comparés automatiquement aux données JSON, dans CouchDB 3.5.0.
 
 ## Source
 [Wikipédia](https://fr.wikipedia.org/wiki/Wikipédia:Citation_et_réutilisation_du_contenu_de_Wikipédia)
