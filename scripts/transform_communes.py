@@ -72,7 +72,6 @@ def main():
     if len(docs) < 2500:
         raise ValueError("Moins de 2 500 communes distinctes")
     write_json(ROOT / "donnees.json", docs)
-    write_json(ROOT / "docs/exemples.json", [unique["commune:59350"], unique["commune:02001"]])
     write_json(ROOT / "results/nettoyage.json", {
         "csv_sha256": original_hash, "avant": len(rows), "apres": len(docs),
         "doublons_retires": len(rows) - len(docs),

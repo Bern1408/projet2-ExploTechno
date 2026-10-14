@@ -1,8 +1,42 @@
-# Étapes 4 à 7 - Résultats vérifiés
+# Projet 2 - Collecter et exploiter des données Web
+
+## Équipe et extraction
+
+- Alexandre Doe-Langevein : étapes 4 à 7.
+- Bernardo Gonçalves da Cruz : étapes 1 à 3 et 8.
+- Pourcentages de participation : à compléter par les membres selon leur contribution réelle.
+
+Dépôt : https://github.com/Bern1408/projet2-ExploTechno
+
+Site : Wikipédia en français, listes des communes du Nord, du Pas-de-Calais, de la Somme et de l'Aisne. Extraction HTML avec Python, Requests et BeautifulSoup (`scripts/scrape_communes.py`). Les quatre URL sources sont conservées dans le script et dans les données.
+
+# Étape 4 - Modélisation
+
+Un document représente une commune française, identifiée par son code INSEE. Les questions visées sont : quelles communes du Nord sont grandes et denses, quelles sont les dix communes les plus peuplées du jeu de données, et quelle est la population cumulée par département ?
+
+| Champ | Type JSON | Rôle |
+| --- | --- | --- |
+| `_id` | string | `commune:` suivi du code INSEE, unique et stable pour ce jeu de données |
+| `type` | string | Toujours `commune`; distingue les données des documents techniques |
+| `code_insee` | string | Cinq caractères, conserve les zéros initiaux |
+| `nom`, `departement` | string | Textes normalisés en Unicode NFC |
+| `codes_postaux`, `cantons` | array de strings | Plusieurs valeurs possibles; tableau vide si inconnu |
+| `arrondissement`, `intercommunalite` | string ou null | Informations administratives |
+| `superficie_km2`, `densite_hab_km2` | number ou null | Décimaux, respectivement km² et habitants/km² |
+| `population` | number entier ou null | Nombre d'habitants |
+| `annee_population` | number entier ou null | Année de référence extraite de la population |
+| `source` | object | URLs `url_liste` et `url_commune`, de type string |
+
+JSON possède un type `number`; les entiers et décimaux sont sérialisés respectivement comme `518` et `5.96`. Une valeur inconnue est `null`, jamais automatiquement zéro. Pour un champ multivalué, l'absence est `[]`. Les années sont des entiers; aucune date complète n'est extraite. Une éventuelle date complète utiliserait `YYYY-MM-DD`.
+
+Les mesures et informations administratives sont généralement consultées avec la commune : elles restent dans le même document pour éviter les jointures. Le modèle principalement plat simplifie les index Mango. Les URLs sont regroupées dans `source`; les codes postaux et les cantons sont des tableaux plutôt que des textes contenant des sauts de ligne. La densité publiée est conservée : un recalcul population/superficie pourrait diverger par arrondi.
+
+Deux exemples complets figurent dans la section suivante : Lille (`commune:59350`), avec plusieurs codes postaux et cantons, et Abbécourt (`commune:02001`), qui illustre les accents et les zéros initiaux. `_rev` est géré par CouchDB et n'est pas inclus dans le fichier à importer. Le code INSEE convient à ce relevé; des fusions ou changements administratifs futurs nécessiteraient une gestion historique supplémentaire.
+
 
 ## Étape 4 : structure
 
-Le modèle est défini dans [modelisation.md](modelisation.md). Un document représente une commune; son identifiant est `commune:<code_insee>`. Les exemples complets suivants illustrent les tableaux, les nombres et les accents.
+Un document représente une commune; son identifiant est `commune:<code_insee>`. Les exemples complets suivants illustrent les tableaux, les nombres et les accents.
 
 ```json
 [
@@ -238,6 +272,12 @@ Les index reproductibles figurent dans `couchdb/indexes.json`. Les réponses Man
 - [Mango, tri, projection et index](https://docs.couchdb.org/en/stable/api/database/find.html)
 - [Introduction aux vues MapReduce](https://docs.couchdb.org/en/stable/ddocs/views/intro.html)
 
-## IA et portée de cette documentation
+## Utilisation de l'IA
 
-Codex a aidé à produire les scripts et la documentation. Les vérifications ont été exécutées sur une véritable instance CouchDB, puis la procédure complète a été relancée. Ce document couvre les étapes 4 à 7; l'équipe peut l'utiliser pour compléter le rapport de l'étape 8, notamment les contributions et pourcentages réels, qui ne sont pas inventés ici.
+Codex a aidé à préparer les scripts et la documentation. Les données et les trois requêtes ont été vérifiées sur CouchDB 3.5.0, et la procédure d'importation a été relancée sans doublons.
+
+## Avis sur les technologies et attribution
+
+Les CSV conservent une extraction lisible et indépendante de CouchDB. JSON permet de représenter les champs multivalués et leurs types. Mango facilite les filtres et les tris, mais nécessite des index adaptés. La vue MapReduce convient aux agrégats par département; elle ajoute une définition technique à maintenir. Docker Compose permet de reproduire la base sans refaire l'extraction.
+
+Source des textes : [Wikipédia - citation et réutilisation](https://fr.wikipedia.org/wiki/Wikipédia:Citation_et_réutilisation_du_contenu_de_Wikipédia). L'utilisation de Codex et les vérifications sont décrites ci-dessus. Chaque membre doit pouvoir expliquer ses contributions et confirmer les pourcentages avant remise.

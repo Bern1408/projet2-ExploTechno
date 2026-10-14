@@ -49,7 +49,7 @@ def main():
             raise RuntimeError("Importation partielle: " + json.dumps(response))
     for index in load("couchdb/indexes.json"):
         request("POST", db + "/_index", index)
-    view = load("couchdb/vue_departements.json")
+    view = load("couchdb/requetes/vue_departements.json")
     old = request("GET", db + "/_design/statistiques", accepted=(404,))
     if old:
         view['_rev'] = old['_rev']
