@@ -1,0 +1,57 @@
+[
+  {
+    "_id": "commune:59350",
+    "type": "commune",
+    "code_insee": "59350",
+    "nom": "Lille",
+    "departement": "Nord",
+    "codes_postaux": [
+      "59000",
+      "59160",
+      "59260",
+      "59777",
+      "59800"
+    ],
+    "arrondissement": "Lille",
+    "cantons": [
+      "Lille-1",
+      "Lille-2",
+      "Lille-3",
+      "Lille-4",
+      "Lille-5",
+      "Lille-6"
+    ],
+    "intercommunalite": "Métropole européenne de Lille",
+    "superficie_km2": 34.83,
+    "population": 238246,
+    "annee_population": 2023,
+    "densite_hab_km2": 6840.0,
+    "source": {
+      "url_liste": "https://fr.wikipedia.org/wiki/Liste_des_communes_du_Nord",
+      "url_commune": "https://fr.wikipedia.org/wiki/Lille"
+    }
+  },
+  {
+    "_id": "commune:02001",
+    "type": "commune",
+    "code_insee": "02001",
+    "nom": "Abbécourt",
+    "departement": "Aisne",
+    "codes_postaux": [
+      "02300"
+    ],
+    "arrondissement": "Laon",
+    "cantons": [
+      "Chauny"
+    ],
+    "intercommunalite": "CA Chauny-Tergnier-La Fère",
+    "superficie_km2": 5.96,
+    "population": 518,
+    "annee_population": 2023,
+    "densite_hab_km2": 87.0,
+    "source": {
+      "url_liste": "https://fr.wikipedia.org/wiki/Liste_des_communes_de_l%27Aisne",
+      "url_commune": "https://fr.wikipedia.org/wiki/Abbécourt"
+    }
+  }
+]

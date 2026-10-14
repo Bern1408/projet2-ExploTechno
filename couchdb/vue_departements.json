@@ -1,0 +1,10 @@
+{
+  "_id":"_design/statistiques",
+  "language":"javascript",
+  "views":{
+    "population_par_departement":{
+      "map":"function(doc) { if (doc.type === 'commune' && typeof doc.departement === 'string' && typeof doc.population === 'number') { emit(doc.departement, doc.population); } }",
+      "reduce":"_stats"
+    }
+  }
+}

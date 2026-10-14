@@ -1,0 +1,14 @@
+services:
+  couchdb:
+    image: couchdb:3.5.0
+    user: "5984:5984"
+    ports:
+      - "127.0.0.1:5984:5984"
+    environment:
+      COUCHDB_USER: ${COUCHDB_USER:?Définir COUCHDB_USER}
+      COUCHDB_PASSWORD: ${COUCHDB_PASSWORD:?Définir COUCHDB_PASSWORD}
+    volumes:
+      - couchdb_data:/opt/couchdb/data
+      - ./couchdb/single-node.ini:/opt/couchdb/etc/local.d/single-node.ini:ro
+volumes:
+  couchdb_data:

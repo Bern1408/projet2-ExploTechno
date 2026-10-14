@@ -1,0 +1,11 @@
+{
+  "couchdb_version": "3.5.0",
+  "base": "projet2_communes",
+  "documents_communes": 3102,
+  "documents_design": 3,
+  "contenu_integral_types_accents": "validés sur tous les documents",
+  "requetes_comparees_au_json": true,
+  "filtre_resultats": 40,
+  "tri_resultats": 10,
+  "groupes": 4
+}

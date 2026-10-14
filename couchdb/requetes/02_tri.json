@@ -1,0 +1,8 @@
+{
+  "selector":{"type":"commune","population":{"$gte":0},"code_insee":{"$gte":""}},
+  "fields":["nom","code_insee","departement","population","annee_population"],
+  "sort":[{"type":"desc"},{"population":"desc"},{"code_insee":"desc"}],
+  "limit":10,
+  "use_index":["classement","par_population"],
+  "allow_fallback":false
+}

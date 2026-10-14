@@ -1,0 +1,75 @@
+{
+  "docs": [
+    {
+      "nom": "Lille",
+      "code_insee": "59350",
+      "departement": "Nord",
+      "population": 238246,
+      "annee_population": 2023
+    },
+    {
+      "nom": "Amiens",
+      "code_insee": "80021",
+      "departement": "Somme",
+      "population": 136449,
+      "annee_population": 2023
+    },
+    {
+      "nom": "Tourcoing",
+      "code_insee": "59599",
+      "departement": "Nord",
+      "population": 98772,
+      "annee_population": 2023
+    },
+    {
+      "nom": "Roubaix",
+      "code_insee": "59512",
+      "departement": "Nord",
+      "population": 98286,
+      "annee_population": 2023
+    },
+    {
+      "nom": "Dunkerque",
+      "code_insee": "59183",
+      "departement": "Nord",
+      "population": 86263,
+      "annee_population": 2023
+    },
+    {
+      "nom": "Calais",
+      "code_insee": "62193",
+      "departement": "Pas-de-Calais",
+      "population": 67571,
+      "annee_population": 2023
+    },
+    {
+      "nom": "Villeneuve-d'Ascq",
+      "code_insee": "59009",
+      "departement": "Nord",
+      "population": 62868,
+      "annee_population": 2023
+    },
+    {
+      "nom": "Saint-Quentin",
+      "code_insee": "02691",
+      "departement": "Aisne",
+      "population": 52813,
+      "annee_population": 2023
+    },
+    {
+      "nom": "Valenciennes",
+      "code_insee": "59606",
+      "departement": "Nord",
+      "population": 43468,
+      "annee_population": 2023
+    },
+    {
+      "nom": "Arras",
+      "code_insee": "62041",
+      "departement": "Pas-de-Calais",
+      "population": 42875,
+      "annee_population": 2023
+    }
+  ],
+  "bookmark": "g1AAAABZeJzLYWBgYMpgSmHgKy5JLCrJTq2MT8lPzkzJBYrzJufn5pbmpVqZGRmYGIIUccAU5QClmUFq2KFqkhgYlleDBFjBirOyAEIVF7Q"
+}

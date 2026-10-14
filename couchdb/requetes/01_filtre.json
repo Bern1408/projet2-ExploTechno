@@ -1,0 +1,7 @@
+{
+  "selector":{"type":"commune","departement":"Nord","population":{"$gte":10000},"densite_hab_km2":{"$gte":1000}},
+  "fields":["nom","code_insee","departement","population","densite_hab_km2"],
+  "use_index":["filtre","par_departement_population"],
+  "allow_fallback":false,
+  "limit":5000
+}

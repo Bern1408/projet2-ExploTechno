@@ -1,0 +1,341 @@
+{
+  "01_filtre": {
+    "dbname": "projet2_communes",
+    "index": {
+      "ddoc": "_design/filtre",
+      "name": "par_departement_population",
+      "type": "json",
+      "partitioned": false,
+      "def": {
+        "fields": [
+          {
+            "type": "asc"
+          },
+          {
+            "departement": "asc"
+          },
+          {
+            "population": "asc"
+          }
+        ]
+      }
+    },
+    "partitioned": false,
+    "selector": {
+      "$and": [
+        {
+          "type": {
+            "$eq": "commune"
+          }
+        },
+        {
+          "departement": {
+            "$eq": "Nord"
+          }
+        },
+        {
+          "population": {
+            "$gte": 10000
+          }
+        },
+        {
+          "densite_hab_km2": {
+            "$gte": 1000
+          }
+        }
+      ]
+    },
+    "opts": {
+      "use_index": [
+        "filtre",
+        "par_departement_population"
+      ],
+      "bookmark": "nil",
+      "limit": 5000,
+      "skip": 0,
+      "sort": {},
+      "fields": [
+        "nom",
+        "code_insee",
+        "departement",
+        "population",
+        "densite_hab_km2"
+      ],
+      "partition": "",
+      "r": 1,
+      "conflicts": false,
+      "stale": false,
+      "update": true,
+      "stable": false,
+      "execution_stats": false,
+      "allow_fallback": false
+    },
+    "limit": 5000,
+    "skip": 0,
+    "fields": [
+      "nom",
+      "code_insee",
+      "departement",
+      "population",
+      "densite_hab_km2"
+    ],
+    "index_candidates": [
+      {
+        "index": {
+          "ddoc": "_design/classement",
+          "name": "par_population",
+          "type": "json",
+          "partitioned": false,
+          "def": {
+            "fields": [
+              {
+                "type": "asc"
+              },
+              {
+                "population": "asc"
+              },
+              {
+                "code_insee": "asc"
+              }
+            ]
+          }
+        },
+        "analysis": {
+          "usable": false,
+          "reasons": [
+            {
+              "name": "field_mismatch"
+            }
+          ],
+          "ranking": 2,
+          "covering": false
+        }
+      },
+      {
+        "index": {
+          "ddoc": null,
+          "name": "_all_docs",
+          "type": "special",
+          "def": {
+            "fields": [
+              {
+                "_id": "asc"
+              }
+            ]
+          }
+        },
+        "analysis": {
+          "usable": true,
+          "reasons": [
+            {
+              "name": "excluded_by_user"
+            }
+          ],
+          "ranking": 1,
+          "covering": null
+        }
+      }
+    ],
+    "selector_hints": [
+      {
+        "type": "json",
+        "indexable_fields": [
+          "densite_hab_km2",
+          "departement",
+          "population",
+          "type"
+        ],
+        "unindexable_fields": []
+      }
+    ],
+    "mrargs": {
+      "include_docs": true,
+      "view_type": "map",
+      "reduce": false,
+      "partition": null,
+      "start_key": [
+        "commune",
+        "Nord",
+        10000
+      ],
+      "end_key": [
+        "commune",
+        "Nord",
+        "<MAX>"
+      ],
+      "direction": "fwd",
+      "stable": false,
+      "update": true,
+      "conflicts": "undefined"
+    },
+    "covering": false
+  },
+  "02_tri": {
+    "dbname": "projet2_communes",
+    "index": {
+      "ddoc": "_design/classement",
+      "name": "par_population",
+      "type": "json",
+      "partitioned": false,
+      "def": {
+        "fields": [
+          {
+            "type": "asc"
+          },
+          {
+            "population": "asc"
+          },
+          {
+            "code_insee": "asc"
+          }
+        ]
+      }
+    },
+    "partitioned": false,
+    "selector": {
+      "$and": [
+        {
+          "type": {
+            "$eq": "commune"
+          }
+        },
+        {
+          "population": {
+            "$gte": 0
+          }
+        },
+        {
+          "code_insee": {
+            "$gte": ""
+          }
+        }
+      ]
+    },
+    "opts": {
+      "use_index": [
+        "classement",
+        "par_population"
+      ],
+      "bookmark": "nil",
+      "limit": 10,
+      "skip": 0,
+      "sort": {
+        "type": "desc",
+        "population": "desc",
+        "code_insee": "desc"
+      },
+      "fields": [
+        "nom",
+        "code_insee",
+        "departement",
+        "population",
+        "annee_population"
+      ],
+      "partition": "",
+      "r": 1,
+      "conflicts": false,
+      "stale": false,
+      "update": true,
+      "stable": false,
+      "execution_stats": false,
+      "allow_fallback": false
+    },
+    "limit": 10,
+    "skip": 0,
+    "fields": [
+      "nom",
+      "code_insee",
+      "departement",
+      "population",
+      "annee_population"
+    ],
+    "index_candidates": [
+      {
+        "index": {
+          "ddoc": "_design/filtre",
+          "name": "par_departement_population",
+          "type": "json",
+          "partitioned": false,
+          "def": {
+            "fields": [
+              {
+                "type": "asc"
+              },
+              {
+                "departement": "asc"
+              },
+              {
+                "population": "asc"
+              }
+            ]
+          }
+        },
+        "analysis": {
+          "usable": false,
+          "reasons": [
+            {
+              "name": "field_mismatch"
+            }
+          ],
+          "ranking": 1,
+          "covering": false
+        }
+      },
+      {
+        "index": {
+          "ddoc": null,
+          "name": "_all_docs",
+          "type": "special",
+          "def": {
+            "fields": [
+              {
+                "_id": "asc"
+              }
+            ]
+          }
+        },
+        "analysis": {
+          "usable": false,
+          "reasons": [
+            {
+              "name": "field_mismatch"
+            }
+          ],
+          "ranking": 1,
+          "covering": null
+        }
+      }
+    ],
+    "selector_hints": [
+      {
+        "type": "json",
+        "indexable_fields": [
+          "code_insee",
+          "population",
+          "type"
+        ],
+        "unindexable_fields": []
+      }
+    ],
+    "mrargs": {
+      "include_docs": true,
+      "view_type": "map",
+      "reduce": false,
+      "partition": null,
+      "start_key": [
+        "commune",
+        "<MAX>"
+      ],
+      "end_key": [
+        "commune",
+        0,
+        ""
+      ],
+      "direction": "rev",
+      "stable": false,
+      "update": true,
+      "conflicts": "undefined"
+    },
+    "covering": false
+  }
+}

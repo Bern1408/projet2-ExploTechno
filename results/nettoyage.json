@@ -1,0 +1,28 @@
+{
+  "csv_sha256": "b19322ed3cd6540e4919eb643e34f24feb3322bbc9e29278dc58f846e26e3f7e",
+  "avant": 3102,
+  "apres": 3102,
+  "doublons_retires": 0,
+  "departements": {
+    "Aisne": 797,
+    "Nord": 647,
+    "Pas-de-Calais": 887,
+    "Somme": 771
+  },
+  "valeurs_manquantes": {
+    "_id": 0,
+    "type": 0,
+    "code_insee": 0,
+    "nom": 0,
+    "departement": 0,
+    "codes_postaux": 1,
+    "arrondissement": 1,
+    "cantons": 1,
+    "intercommunalite": 1,
+    "superficie_km2": 0,
+    "population": 0,
+    "annee_population": 0,
+    "densite_hab_km2": 0,
+    "source": 0
+  }
+}
